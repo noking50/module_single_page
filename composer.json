@@ -1,0 +1,26 @@
+{
+    "name": "noking50/module_single_page",
+    "description": "The module of single page",
+    "keywords": ["laravel"],
+    "authors": [
+        {
+            "name": "noking50",
+            "email": "noking50@gmail.com"
+        }
+    ],
+    "require": {
+        "noking50/module_required": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Noking50\\Modules\\SinglePage\\": "src/Module"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Noking50\\Modules\\SinglePage\\ModuleSinglePageServiceProvider"
+            ]
+        }
+    }
+}
