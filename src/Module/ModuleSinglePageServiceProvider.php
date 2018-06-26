@@ -14,7 +14,7 @@ class ModuleSinglePageServiceProvider extends ServiceProvider {
             __DIR__ . '/../config/module_single_page.php' => config_path('module_single_page.php'),
             __DIR__ . '/../lang' => resource_path('lang/vendor/module_single_page'),
             __DIR__.'/../views' => base_path('resources/views/vendor/module_single_page'),
-            __DIR__.'/../enum' => base_path('resources/enum/module_single_page.php'),
+            __DIR__.'/../enum' => base_path('resources/enum/module_single_page-content_type.php'),
         ]);
     }
 
