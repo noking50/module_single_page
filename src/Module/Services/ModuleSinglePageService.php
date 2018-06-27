@@ -31,7 +31,9 @@ class ModuleSinglePageService {
             $dataRow->files = \FileUpload::getFiles($dataRow->files);
             $dataSet_lang = $this->moduleSinglePageLangRepository->listAll($dataRow->id);
             foreach ($dataSet_lang as $k => $v) {
+                $html_dir = 'module_single_page/' . $group . '/' . $k;
                 $dataSet_lang[$k]->content = json_decode($v->content, true);
+                $dataSet_lang[$k]->content_html_url = $this->zipHtmlService->getHtmlUrl($html_dir);
             }
             $dataRow->lang = $dataSet_lang->keyBy('lang');
         } else {
@@ -57,6 +59,7 @@ class ModuleSinglePageService {
             $dataRow->fill([
                 'created_at' => null,
                 'updated_at' => null,
+                'content_type' => 1,
                 'files' => '[]',
                 'lang' => collect(),
             ]);
