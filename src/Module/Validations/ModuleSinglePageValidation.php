@@ -9,13 +9,15 @@ use Noking50\FileUpload\Rules\JsonEditor;
 class ModuleSinglePageValidation extends BaseValidation {
 
     public function validate_edit($group, $request_data = null) {
+        $config_validation_path = "module_single_page.groups.{$group}.validation";
+        
         $rules = [
             'content_type' => ['integer', 'required', 'in:1,2'],
-            'files' => [new JsonFile()],
+            'files' => [config($config_validation_path . '.files', 0) == 2 ? 'required' : 'nullable', new JsonFile()],
             'lang' => ['array'],
         ];
         $rules_lang = [
-            'title' => ['string', (config("module_single_page.groups.{$group}.validation.title", 0) == 2 ? 'required' : 'nullable'), 'max:100'],
+            'title' => ['string', (config($config_validation_path . '.title', 0) == 2 ? 'required' : 'nullable'), 'max:100'],
             'content' => [new JsonEditor()],
         ];
         $attributes = array_merge(

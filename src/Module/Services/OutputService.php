@@ -34,6 +34,7 @@ class OutputService {
         return [
             'dataRow_module_single_page' => $dataRow_module_single_page,
             'form_choose_lang' => $form_choose_lang,
+            'module_group' => $group,
         ];
     }
 
@@ -42,12 +43,11 @@ class OutputService {
 
         $langs = is_null($dataRow_module_single_page) ? [] : $dataRow_module_single_page->lang->pluck('lang')->toArray();
         $form_choose_lang = $this->languageService->getListFormChoose($langs);
-        $validation_required = config("module_single_page.groups.{$group}.validation_required", []);
 
         return [
             'dataRow_module_single_page' => $dataRow_module_single_page,
             'form_choose_lang' => $form_choose_lang,
-            'validation_required' => $validation_required,
+            'module_group' => $group,
         ];
     }
 
@@ -144,6 +144,7 @@ class OutputService {
 
         return [
             'dataRow_module_single_page' => $dataRow_module_single_page,
+            'module_group' => $group,
         ];
     }
 
