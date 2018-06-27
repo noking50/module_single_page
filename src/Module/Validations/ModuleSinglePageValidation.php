@@ -9,7 +9,7 @@ use Noking50\FileUpload\Rules\JsonEditor;
 class ModuleSinglePageValidation extends BaseValidation {
 
     public function validate_edit($group, $request_data = null) {
-        $validation_required = config("module_single_page::groups.{$group}.validation_required", []);
+        $validation_required = config("module_single_page.groups.{$group}.validation_required", []);
         $rules = [
             'content_type' => ['integer', 'required', 'in:1,2'],
             'files' => [new JsonFile()],
