@@ -50,7 +50,7 @@ class OutputService {
     }
 
     public function getBackendEditSubmit($group) {
-        $this->moduleSinglePageValidation->validate_edit();
+        $this->moduleSinglePageValidation->validate_edit($group);
 
         DB::beginTransaction();
         try {

@@ -8,14 +8,15 @@ use Noking50\FileUpload\Rules\JsonEditor;
 
 class ModuleSinglePageValidation extends BaseValidation {
 
-    public function validate_edit($request_data = null) {
+    public function validate_edit($group, $request_data = null) {
+        $validation_required = config("module_single_page::groups.{$group}.validation_required", []);
         $rules = [
             'content_type' => ['integer', 'required', 'in:1,2'],
             'files' => [new JsonFile()],
             'lang' => ['array'],
         ];
         $rules_lang = [
-            'title' => ['string', 'nullable', 'max:100'],
+            'title' => ['string', (in_array('title', $validation_required) ? 'required' : 'nullable'), 'max:100'],
             'content' => [new JsonEditor()],
         ];
         $attributes = array_merge(
@@ -29,7 +30,7 @@ class ModuleSinglePageValidation extends BaseValidation {
             }
         }
 
-        return $this->validate($rules, $request_data, $attributes, [
+        return $this->validate($rules, $request_data, $attributes, [], [
                     ['lang.*.content', ['required', new JsonEditor(true)], function($input) {
                             return $input->{"content_type"} == 1;
                         }],
