@@ -4,14 +4,10 @@ return [
     'datatable' => 'module_single_page',
     'file_ext' => 'pdf|doc|docx|xls|xlsx|zip',
     'groups' => [
-        'aboutus' => [
-            'validation_required' => [
-                'title'
-            ]
-        ],
-        'contact' => [
-            'validation_required' => [
-            ]
+        'group-name' => [
+            'validation' => [ // 0: hidden, 1: visible, 2: required
+                'title' => 2,
+            ],
         ],
     ],
 ];
