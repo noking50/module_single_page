@@ -20,7 +20,10 @@
         "laravel": {
             "providers": [
                 "Noking50\\Modules\\SinglePage\\ModuleSinglePageServiceProvider"
-            ]
+            ],
+            "aliases": {
+                "ModuleSinglePage": "Noking50\\Modules\\BannerCarousel\\Facades\\ModuleSinglePage"
+            }
         }
     }
 }

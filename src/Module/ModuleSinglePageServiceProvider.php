@@ -3,6 +3,7 @@
 namespace Noking50\Modules\SinglePage;
 
 use Illuminate\Support\ServiceProvider;
+use Noking50\Modules\SinglePage\Services\ControllerOutputService;
 
 class ModuleSinglePageServiceProvider extends ServiceProvider {
 
@@ -27,6 +28,18 @@ class ModuleSinglePageServiceProvider extends ServiceProvider {
         $this->mergeConfigFrom(
                 __DIR__ . '/../config/module_single_page.php', 'module_single_page'
         );
+        $this->app->singleton('module_single_page', function () {
+            return new ControllerOutputService;
+        });
+    }
+
+    /**
+     * Get the services provided by the provider.
+     *
+     * @return array
+     */
+    public function provides() {
+        return ['module_single_page'];
     }
 
 }

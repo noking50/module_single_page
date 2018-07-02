@@ -11,7 +11,7 @@ use DB;
 use DBLog;
 use FileUpload;
 
-class OutputService {
+class ControllerOutputService {
 
     protected $moduleSinglePageService;
     protected $languageService;
@@ -25,7 +25,7 @@ class OutputService {
         $this->moduleSinglePageValidation = $moduleSinglePageValidation;
     }
 
-    public function getBackendDetail($group) {
+    public function detailBackend($group) {
         $dataRow_module_single_page = $this->moduleSinglePageService->getDetailBackend($group);
 
         $langs = is_null($dataRow_module_single_page) ? [] : $dataRow_module_single_page->lang->pluck('lang')->toArray();
@@ -38,7 +38,7 @@ class OutputService {
         ];
     }
 
-    public function getBackendEdit($group) {
+    public function detailBackendEdit($group) {
         $dataRow_module_single_page = $this->moduleSinglePageService->getDetailBackendEdit($group);
 
         $langs = is_null($dataRow_module_single_page) ? [] : $dataRow_module_single_page->lang->pluck('lang')->toArray();
@@ -51,7 +51,16 @@ class OutputService {
         ];
     }
 
-    public function getBackendEditSubmit($group) {
+    public function detailFrontend($group) {
+        $dataRow_module_single_page = $this->moduleSinglePageService->getDetailFrontend($group);
+
+        return [
+            'dataRow_module_single_page' => $dataRow_module_single_page,
+            'module_group' => $group,
+        ];
+    }
+
+    public function actionEdit($group) {
         $this->moduleSinglePageValidation->validate_edit($group);
 
         DB::beginTransaction();
@@ -134,17 +143,6 @@ class OutputService {
 
         return [
             'msg' => trans('message.success.edit'),
-        ];
-    }
-
-    #
-
-    public function getFrontendDetail($group) {
-        $dataRow_module_single_page = $this->moduleSinglePageService->getDetailFrontend($group);
-
-        return [
-            'dataRow_module_single_page' => $dataRow_module_single_page,
-            'module_group' => $group,
         ];
     }
 
