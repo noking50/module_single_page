@@ -28,8 +28,12 @@ class ModuleSinglePageServiceProvider extends ServiceProvider {
         $this->mergeConfigFrom(
                 __DIR__ . '/../config/module_single_page.php', 'module_single_page'
         );
-        $this->app->singleton('module_single_page', function () {
-            return new ControllerOutputService;
+        $this->app->singleton('module_single_page', function ($app) {
+            return new ControllerOutputService(
+                    $app['Noking50\Modules\SinglePage\Services\ModuleSinglePageService'], 
+                    $app['Noking50\Modules\Required\Services\LanguageService'], 
+                    $app['Noking50\Modules\SinglePage\Validations\ModuleSinglePageValidation']
+            );
         });
     }
 
